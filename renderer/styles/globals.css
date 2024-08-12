@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .btn {
+        @apply py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 active:shadow-md bg-white rounded-lg border border-gray-200 hover:bg-gray-100;
+    }
+
+    .btn-primary {
+        @apply btn bg-blue-600 text-white hover:bg-blue-700;
+    }
+
+    .btn-secondary {
+        @apply btn bg-gray-200 text-white hover:bg-gray-300 text-black;
+    }
+
+    .btn-navbar {
+        @apply bg-gray-200 text-black px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-300 active:shadow-md
+    }
+
+    .btn-trade {
+        @apply px-2 py-1 rounded-md
+    }
+
+    .btn-trade-minus {
+        @apply btn-trade bg-red-200 text-red-600 hover:bg-red-300
+    }
+
+    .btn-trade-plus {
+        @apply btn-trade bg-green-200 text-green-600 hover:bg-green-300
+    }
+
+    .btn-trade-disabled {
+        @apply btn-trade bg-gray-200 text-gray-600 cursor-not-allowed
+    }
+
+    .clickable-cards {
+        @apply block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow cursor-pointer hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700
+    }
+}

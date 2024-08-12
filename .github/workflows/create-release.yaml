@@ -1,0 +1,71 @@
+name: Create Release
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  tagged-release:
+    name: "Tagged Release"
+    runs-on: "ubuntu-latest"
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '22'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build for mac arm
+        run: npm run build:macarm
+
+      - name: Zip macOS arm build
+        run: |
+          zip -r AlteredTrader_mac_arm64.zip dist/mac-arm64/AlteredTrader.app
+
+      - name: Build for mac x64
+        run: npm run build:mac64
+
+      - name: Zip macOS x64 build
+        run: |
+          zip -r AlteredTrader_mac_x64.zip dist/mac/AlteredTrader.app
+
+      - name: Build for Windows
+        run: npm run build:win64
+
+      - name: Move Windows build
+        run: |
+          mv dist/AlteredTrader\ Setup\ 1.0.0.exe AlteredTrader\ Setup\ 1.0.0.exe
+
+      - name: Build for Linux
+        run: npm run build:linux64
+
+      - name: Move Linux build
+        run: |
+          cd dist
+          mv dist/AlteredTrader-1.0.0.AppImage AlteredTrader-1.0.0.AppImage
+
+      - name: Update CHANGELOG
+        id: changelog
+        uses: requarks/changelog-action@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ github.ref_name }}
+          excludeTypes: build,docs,other,style,chore
+          writeToFile: false
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          body: ${{ steps.changelog.outputs.changes }}
+          files: |
+            AlteredTrader-1.0.0.AppImage
+            AlteredTrader\ Setup\ 1.0.0.exe
+            AlteredTrader_mac_x64.zip
+            AlteredTrader_mac_arm64.zip
