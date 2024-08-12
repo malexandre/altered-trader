@@ -1,6 +1,6 @@
 appId: com.example.nextron
 productName: AlteredTrader
-copyright: Copyright © 2018 Yoshihide Shiono
+copyright: Copyright © 2024 Marc Alexandre
 directories:
   output: dist
   buildResources: resources

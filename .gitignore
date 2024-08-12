@@ -11,6 +11,7 @@ next-env.d.ts
 # build
 /app
 dist
+build
 
 .DS_Store
 node_modules/

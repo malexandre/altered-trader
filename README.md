@@ -24,7 +24,7 @@ La page wantlist utilise la wantlist du site officiel pour trouver toutes les ca
 
 ### Échanges
 
-Vous pouvez accepter ou refuser des échanges à partir de cette page, ou visualiser l'historique des échanges. La seule vraie différence avec le site officiel étant que je n'affiche pas les échanges annulés.
+Vous pouvez accepter ou refuser des échanges à partir de cette page, ou visualiser l'historique des échanges. La seule vraie différence avec le site officiel étant que je n'affiche pas les échanges annulés. Pour ajouter des cartes à un échange, pour l'instant il faut juste passer par l'onglet Amis, sélectionner les cartes que vous voulez échanger avec cette personne, et en cliquant sur démarrer un échange, ça les ajoutera à l'échange existante au lieu d'en créer une nouvelle (c'est le même comportement que le site officiel).
 
 ### Amis
 
