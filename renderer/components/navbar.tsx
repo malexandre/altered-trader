@@ -46,6 +46,11 @@ const Navbar = ({
               Amis
             </Link>
           </li>
+          <li>
+            <Link className="bg-gray-700 text-white px-3 py-2 rounded-md text-sm font-medium" href="/uniques">
+              Uniques au trade
+            </Link>
+          </li>
         </ul>
         <div className="flex items-center space-x-4">
           <input
