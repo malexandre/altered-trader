@@ -281,9 +281,17 @@ export default function Friends() {
     }
   }, [bearerToken])
 
-  const openModal = async (friend) => {
+  const openModal = async (friend: Friend) => {
     if (bearerToken) {
-      const fetchedFriendsTradelists = await fetchFriendsTradelist(bearerToken, [friend])
+      if (loading) {
+        toast.error('Un chargement est déjà en cours')
+        return
+      }
+      const fetchedFriendsTradelists = await toast.promise(fetchFriendsTradelist(bearerToken, [friend]), {
+        pending: `Mise a jour de la liste d'échange de ${friend.name}`,
+        success: `Liste d'échange de ${friend.name} à jour 👌`,
+        error: `Erreur durant le chargement de la liste d'échange`,
+      })
 
       const newFriendsTradelists = { ...friendsTradelists, [friend.id]: fetchedFriendsTradelists[friend.id] }
       setFriendsTradelists(newFriendsTradelists)
@@ -320,7 +328,7 @@ export default function Friends() {
                 {friend.name} ({(friendsTradelists[friend.id] || []).reduce((total, card) => total + card.theyHave, 0)}{' '}
                 cartes)
               </h2>
-              <div className="text-sm">Dernière MAJ: {friend.updatedAt.replace('T', ' ').split('.')[0]}</div>
+              <div className="text-sm">Dernière MAJ: {friend.updatedAt?.replace('T', ' ').split('.')[0]}</div>
             </div>
           ))}
         </div>
