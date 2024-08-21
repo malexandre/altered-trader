@@ -1,17 +1,11 @@
 import { screen, BrowserWindow } from 'electron'
-import Store from 'electron-store'
 
 export const createWindow = (windowName, options) => {
-  const key = 'window-state'
-  const name = `window-state-${windowName}`
-  const store = new Store({ name })
   const defaultSize = {
     width: options.width,
     height: options.height,
   }
   let state = {}
-
-  const restore = () => store.get(key, defaultSize)
 
   const getCurrentPosition = () => {
     const position = win.getPosition()
@@ -53,14 +47,14 @@ export const createWindow = (windowName, options) => {
     return windowState
   }
 
-  const saveState = () => {
-    if (!win.isMinimized() && !win.isMaximized()) {
-      Object.assign(state, getCurrentPosition())
-    }
-    store.set(key, state)
-  }
+  // const saveState = () => {
+  //   if (!win.isMinimized() && !win.isMaximized()) {
+  //     Object.assign(state, getCurrentPosition())
+  //   }
+  //   store.set(key, state)
+  // }
 
-  state = ensureVisibleOnSomeDisplay(restore())
+  state = ensureVisibleOnSomeDisplay({})
 
   const win = new BrowserWindow({
     ...state,
@@ -72,7 +66,7 @@ export const createWindow = (windowName, options) => {
     },
   })
 
-  win.on('close', saveState)
+  // win.on('close', saveState)
 
   return win
 }
