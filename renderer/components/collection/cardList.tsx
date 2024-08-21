@@ -11,7 +11,7 @@ export default function CardsComponent({ filters }: { filters: SearchFilters }) 
     <div className="flex flex-wrap gap-4">
       {Object.values(userCollection)
         .filter((card) => {
-          if (card.cardType == 'FOILER') {
+          if (card.cardType === 'FOILER') {
             return false
           }
 
@@ -30,8 +30,7 @@ export default function CardsComponent({ filters }: { filters: SearchFilters }) 
           if (
             filters.missing &&
             (card.inMyCollection >= 3 ||
-              (card.rarity == 'UNIQUE' && card.inMyCollection == 1) ||
-              (card.cardType == 'CHARACTER' && card.inMyCollection == 1))
+              (card.inMyCollection == 1 && (card.rarity == 'UNIQUE' || card.cardType == 'HERO')))
           ) {
             return false
           }
